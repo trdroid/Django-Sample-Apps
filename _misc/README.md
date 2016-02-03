@@ -1,3 +1,3 @@
 > $ sudo pip install virtualenv
 
-> $ pip install virtualenv
+> $ sudo pip install virtualenv
