@@ -182,3 +182,31 @@ To create the tables in the database, run the <i>migrate</i> management command:
       Applying auth.0007_alter_validators_add_error_messages... OK
       Applying sessions.0001_initial... OK
 
+NOTE:  When the virtual environment is active, python in the command line refers to the version of python used when creating the virtual environment.
+
+
+
+### Start Development Server
+
+Django comes with a lightweight web server. It can be used to quickly run and test the app in the development phase. It checks for changes in the code and reloads the updated code. However, if new files are added to the project, the server has to be manually restarted.
+
+To start the development server:
+
+(vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver
+
+    Performing system checks...
+    
+    System check identified no issues (0 silenced).
+    February 04, 2016 - 17:34:43
+    Django version 1.9.2, using settings 'documentsite.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+Requesting 127.0.0.1:8000 in the browser    
+
+    Not Found: /
+    [04/Feb/2016 17:39:31] "GET / HTTP/1.1" 200 1767
+    Not Found: /favicon.ico
+    [04/Feb/2016 17:39:32] "GET /favicon.ico HTTP/1.1" 404 1942
+
+ 
