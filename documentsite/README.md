@@ -209,4 +209,12 @@ Requesting 127.0.0.1:8000 in the browser
     Not Found: /favicon.ico
     [04/Feb/2016 17:39:32] "GET /favicon.ico HTTP/1.1" 404 1942
 
- 
+for subsequent requests
+
+    Not Found: /
+    [04/Feb/2016 17:43:03] "GET / HTTP/1.1" 200 1767
+
+Opening the app in the browser:
+
+<img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/browser_snapshot.png"/>
+
