@@ -1,8 +1,8 @@
 ### Projects, Applications
 
 In Django,
-* Project: is a Django installation with settings
-* Application: is a collection of models, views, templates and URLs
+* Project: is a Django installation with settings. A project is considered as the website and it constitutes applications which can be reused in other projects. For example, a document management site could contain applications like documents, feedback etc. The feedback application can be used in another project.
+* Application: is a collection of models, views, templates and URLs. Applications customize the framework extension points to provide specific functionalities. 
 
 ### Creating the project
 
@@ -289,3 +289,16 @@ To deploy an application in a production environment, it should be run as a <b>W
 
 https://docs.djangoproject.com/en/1.9/howto/deployment/
 
+### Creating an application
+
+> $ (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py startapp docs
+
+> $ (vir_env) droid@droidserver:~/onGit/Django$ ls documentsite
+
+    db.sqlite3  docs  documentsite  manage.py  _misc  README.md
+    
+> $ (vir_env) droid@droidserver:~/onGit/Django$ ls documentsite/docs
+
+    admin.py  apps.py  __init__.py  migrations  models.py  tests.py  views.py
+
+<img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/creating_docs_application.png"/>
