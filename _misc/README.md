@@ -30,6 +30,7 @@ This creates a directory vir_env in the current working directory and a Python e
 <i>Create an isolated Python environment 'vir_env' with the another python version on the system</i>
 
 > $ which python3
+
     /usr/bin/python3
 
 > $ python3 --version
