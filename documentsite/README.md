@@ -247,7 +247,7 @@ Django comes with a lightweight web server. It can be used to quickly run and te
 
 To start the development server:
 
-(vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver
 
     Performing system checks...
     
