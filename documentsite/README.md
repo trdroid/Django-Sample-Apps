@@ -1,3 +1,9 @@
+### Projects, Applications
+
+In Django,
+* Project: is a Django installation with settings
+* Application: is a collection of models, views, templates and URLs
+
 ### Creating the project
 
 Activate the virtual environment 
@@ -18,16 +24,16 @@ Create the project
   
     documentsite  manage.py  README.md
 
-### App Structure
+### Project Structure
   
 <img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/app%20structure.png"/>
 
-<i>documentsite/documentsite/</i>: is the app directory
+<i>documentsite/documentsite/</i>: is the project directory
 
-    __init__.py: An empty file that tells Python to treat "documentsite" app directory as a Python module.
-    settings.py: holds settings and configuration for the app. It is initialized with default settings. By default, it is configured to use a SQLite database and a list of Django applications.
+    __init__.py: An empty file that tells Python to treat "documentsite" directory as a Python module.
+    settings.py: holds settings and configuration of the project. It is initialized with default settings. By default, it is configured to use a SQLite database and a list of Django applications.
     urls.py: holds URL patterns. Each URL pattern is mapped to a view.
-    wsgi.py: contains configuration to run the app as a WSGI application
+    wsgi.py: contains configuration to run the project as a WSGI application
     
 <i>documentsite/manage.py</i>: is a wrapper around the django-admin.py tool. It is offered as a command line utiltiy to interact with the project.
 
@@ -35,7 +41,10 @@ Create the project
 
 <i>documentsite/documentsite/settings.py</i>
 
-The settings.py file, by default, is  configured to use a SQLite database and a list of Django applications. 
+The settings.py file, by default, is configured to use a SQLite database and a list of Django applications. 
+
+All settings and their default values can be found at: 
+https://docs.djangoproject.com/en/1.9/topics/settings/
 
 ```python
 """
@@ -160,6 +169,52 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 ```
+<i>DEBUG</i>: is a boolean that sets/unsets the project's debug mode. If set, Django displays a details error pages on uncaught exceptions thrown by an application. It is set by default. 
+
+<i>ALLOWED_HOSTS</i>: is only used when the project is moved to production but not when debugging (i.e. when DEBUG=TRUE) or when running tests. 
+
+When a project is moved to production, set DEBUG=FALSE and add the domain/host name to ALLOWED_HOSTS to allow the domain to serve the Django site. 
+
+<i>INSTALLED_APPS</i>: specifies Django which applications are active for the site.
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',             # administration site
+    'django.contrib.auth',              # authentication framework
+    'django.contrib.contenttypes',      # content types framework
+    'django.contrib.sessions',          # sessions framework
+    'django.contrib.messages',          # messaging framework
+    'django.contrib.staticfiles',       # static files management framework
+]
+```
+
+<i>MIDDLEWARE_CLASSES</i>: specifies middlewares to be executed in a tuple.
+
+```python
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+```
+<i>ROOT_URLCONF</i>: specifies the Python module the location where root URL patterns of the application are defined
+
+<i>DATABASES</i>: contains the settings for all the databases used in the project in a dictionary. It MUST contain a <i>default</i> database. The default configuration uses SQLite database as a default database.
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+<i>LANGUAGE_CODE</i>: specifies the default language code for this Django site.
 
 To create the tables in the database, run the <i>migrate</i> management command:
 
@@ -192,7 +247,7 @@ Django comes with a lightweight web server. It can be used to quickly run and te
 
 To start the development server:
 
-(vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver
 
     Performing system checks...
     
@@ -217,4 +272,20 @@ for subsequent requests
 Opening the app in the browser:
 
 <img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/browser_snapshot.png"/>
+
+<i>Providing custom host and port</i>
+
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver 127.0.0.1:8999
+
+<i>Loading settings</i>
+
+Settings for an environment can be saved in its own separate file and loaded as per the environment.
+
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py runserver 127.0.0.1:8999 --settings=documentsite.settings
+
+### Deploying in Production Environment
+
+To deploy an application in a production environment, it should be run as a <b>Web Server Gateway Interface (WSGI)</b> application deployed on a real web server such as Apache, Gunicorn or uWSGI.
+
+https://docs.djangoproject.com/en/1.9/howto/deployment/
 
