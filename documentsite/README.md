@@ -1,3 +1,9 @@
+### Projects, Applications
+
+In Django,
+* Project: is a Django installation with settings
+* Application: is a collection of models, views, templates and URLs
+
 ### Creating the project
 
 Activate the virtual environment 
@@ -169,7 +175,7 @@ STATIC_URL = '/static/'
 
 When a project is moved to production, set DEBUG=FALSE and add the domain/host name to ALLOWED_HOSTS to allow the domain to serve the Django site. 
 
-<i>INSTALLED_APPS</i>: specifies to Django which applications are active for the site.
+<i>INSTALLED_APPS</i>: specifies Django which applications are active for the site.
 
 ```python
 INSTALLED_APPS = [
@@ -181,6 +187,34 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',       # static files management framework
 ]
 ```
+
+<i>MIDDLEWARE_CLASSES</i>: specifies middlewares to be executed in a tuple.
+
+```python
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+```
+<i>ROOT_URLCONF</i>: specifies the Python module the location where root URL patterns of the application are defined
+
+<i>DATABASES</i>: contains the settings for all the databases used in the project in a dictionary. It MUST contain a <i>default</i> database. The default configuration uses SQLite database as a default database.
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+<i>LANGUAGE_CODE</i>: specifies the default language code for this Django site.
 
 To create the tables in the database, run the <i>migrate</i> management command:
 
