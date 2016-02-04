@@ -50,6 +50,8 @@ This creates a directory vir_env in the current working directory and a Python e
 
 Activate the virutal environment which displays the name of the active virual envionment enclosed in parentheses in the shell prompt.
 
+> $ source \<path to virtual environment directory\>/bin/activate
+
 > $ source vir_env/bin/activate
 
     (vir_env) droid@droidserver:~/scratchpad/Django$
