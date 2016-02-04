@@ -31,7 +31,7 @@ Create the project
     
 <i>documentsite/manage.py</i>: is a wrapper around the django-admin.py tool. It is offered as a command line utiltiy to interact with the project.
 
-<b>Create the tables in the database</b>
+### Create the tables in the database
 
 <i>documentsite/documentsite/settings.py</i>
 
