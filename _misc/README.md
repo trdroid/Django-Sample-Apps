@@ -1,7 +1,4 @@
-> $ sudo apt-get -y install python-pip
-
-
-Create an isolated Python environment 
+### Create an isolated Python environment 
 
 <b>Installing virtualenv</b>
 
@@ -62,4 +59,41 @@ Python libraries installed when a virtual environment is active are saved under 
 <i>\<virtual-environment-directory\>/lib/\<python-version\>/site-packages</i>
 
 eg. vir_env/lib/python3.4/site-packages
+
+<b>Deactivate virtual environment</b>
+
+> $ deactivate
+
+### Installing Django
+
+Get pip (pre-installed with Python >= 3.5)
+
+> $ sudo apt-get -y install python-pip
+
+Install Django in the virtual environment
+
+> $ (vir_env) droid@droidserver:~/scratchpad/Django$ pip install Django==1.9.2
+
+    Collecting Django==1.9.2
+      Downloading Django-1.9.2-py2.py3-none-any.whl (6.6MB)
+        100% |████████████████████████████████| 6.6MB 29kB/s 
+    Installing collected packages: Django
+    Successfully installed Django-1.9.2
+
+Django gets installed in <i>vir_env/lib/python3.4/site-packages</i>
+
+> $ ls vir_env/lib/python3.4/site-packages
+
+    django  Django-1.9.2.dist-info  easy_install.py  _markerlib  pip  pip-8.0.2.dist-info  pkg_resources  __pycache__  setuptools  setuptools-19.6.2.dist-info  wheel  wheel-0.26.0.dist-info
+
+Verify if Django has been installed
+
+> $ (vir_env) droid@droidserver:~/scratchpad/Django$ python3
+
+    Python 3.4.3 (default, Oct 14 2015, 20:28:29) 
+    [GCC 4.8.4] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import django
+    >>> django.VERSION
+    (1, 9, 2, 'final', 0)
 
