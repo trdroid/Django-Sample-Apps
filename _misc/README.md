@@ -57,7 +57,9 @@ Activate the virutal environment which displays the name of the active virual en
 
     (vir_env) droid@droidserver:~/scratchpad/Django$
 
-Python libraries installed when a virtual environment is active are saved under <i>\<virtual-environment-directory\>/lib/\<python-version\>/site-packages</i> directory.
+Python libraries installed when a virtual environment is active are saved under directory:
+
+<i>\<virtual-environment-directory\>/lib/\<python-version\>/site-packages</i>
 
 eg. vir_env/lib/python3.4/site-packages
 
