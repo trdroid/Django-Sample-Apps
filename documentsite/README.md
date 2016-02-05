@@ -1,8 +1,8 @@
 ### Projects, Applications
 
 In Django,
-* Project: is a Django installation with settings. A project is considered as the website and it constitutes applications which can be reused in other projects. For example, a document management site could contain applications like documents, feedback etc. The feedback application can be used in another project.
-* Application: is a collection of models, views, templates and URLs. Applications customize the framework extension points to provide specific functionalities. 
+* Project: is a Django installation with settings. A project is considered as the website and it constitutes applications which can be reused in other projects. For example, a document management site could contain applications like documents, feedback etc. The feedback application can be used in other projects like blogs, albums etc.
+* Application: is a collection of models, views, templates and URLs. Applications extend and customize the framework extension points to provide specific functionalities. 
 
 ### Creating the project
 
