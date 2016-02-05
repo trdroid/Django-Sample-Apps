@@ -28,6 +28,8 @@ Create the project
   
 <img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/app%20structure.png"/>
 
+<b> Generated Files </b>
+
 <i>documentsite/documentsite/</i>: is the project directory
 
     __init__.py: An empty file that tells Python to treat "documentsite" directory as a Python module.
@@ -302,3 +304,19 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/
     admin.py  apps.py  __init__.py  migrations  models.py  tests.py  views.py
 
 <img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/creating_docs_application.png"/>
+
+### Application Structure
+
+<b> Generated Files </b>
+
+<i>documentsite/docs/migrations/</i>: is the directory that holds database migrations of the application. Django keeps track of model changes using migrations and synchronizes the database accordingly. 
+
+<i>documentsite/docs/admin.py</i>: is the file where models are registered to include them into the Django administration site, the usage of which is optional.
+
+<i>documentsite/docs/models.py</i>: a MUST TO HAVE file that constitutes the data models of the application. It could also be left empty.
+
+<i>documentsite/docs/tests.py</i>: is where the tests of the application should be added
+
+<i>documentsite/docs/views.py</i>: contains the application logic. Each web request is routed to an appropriate view which receives the HTTP request, processes it, and returns a response. 
+
+
