@@ -218,6 +218,8 @@ DATABASES = {
 ```
 <i>LANGUAGE_CODE</i>: specifies the default language code for this Django site.
 
+<i>USE_TZ</i>: is a boolean that specifies if the time zone support is active. Django supports datetimes that are aware of timezones. USE_TZ is set to true by default.
+
 To create the tables in the database, run the <i>migrate</i> management command:
 
 > (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py migrate
@@ -309,14 +311,37 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/
 
 <b> Generated Files </b>
 
-<i>documentsite/docs/migrations/</i>: is the directory that holds database migrations of the application. Django keeps track of model changes using migrations and synchronizes the database accordingly. 
+<i>documentsite/docs/migrations/</i>
 
-<i>documentsite/docs/admin.py</i>: is the file where models are registered to include them into the Django administration site, the usage of which is optional.
+is the directory that holds database migrations of the application. Django keeps track of model changes using migrations and synchronizes the database accordingly. 
 
-<i>documentsite/docs/models.py</i>: a MUST TO HAVE file that constitutes the data models of the application. It could also be left empty.
+<i>documentsite/docs/admin.py</i>
 
-<i>documentsite/docs/tests.py</i>: is where the tests of the application should be added
+is the file where models are registered to include them into the Django administration site, the usage of which is optional.
 
-<i>documentsite/docs/views.py</i>: contains the application logic. Each web request is routed to an appropriate view which receives the HTTP request, processes it, and returns a response. 
+<i>documentsite/docs/models.py</i>
+
+a MUST TO HAVE file that constitutes the data models of the application. It could also be left empty.
+
+<i>documentsite/docs/tests.py</i>
+
+is where the tests of the application should be added
+
+<i>documentsite/docs/views.py</i>
+
+contains the application logic. Each web request is routed to an appropriate view which receives the HTTP request, processes it, and returns a response. 
+
+### Designing Schema for Documents
+
+A model in Django is a python class that inherits from <b>django.db.models.Model</b>. 
+
+Django creates a table for each model in <i>documentsite/docs/models.py</i>.
+
+Each attribute in a model class corresponds to a column in the table that the model class represents.
+
+A Model class obtains its default functionality from <b>django.db.models.Model</b>, which allows easy interaction with the database.
+
+
+
 
 
