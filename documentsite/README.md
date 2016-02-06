@@ -220,6 +220,8 @@ DATABASES = {
 
 <i>USE_TZ</i>: is a boolean that specifies if the time zone support is active. Django supports datetimes that are aware of timezones. USE_TZ is set to true by default.
 
+<b> Create tables in the database </b>
+
 To create the tables in the database, run the <i>migrate</i> management command:
 
 > (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py migrate
@@ -243,6 +245,17 @@ To create the tables in the database, run the <i>migrate</i> management command:
 
 NOTE:  When the virtual environment is active, python in the command line refers to the version of python used when creating the virtual environment.
 
+The version of python when the virtual environment is active is 3.4.3 as it was created with that version.
+
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python --version
+
+    Python 3.4.3
+
+Whereas, the version of python on the system is 2.7.6
+
+> droid@droidserver:~$ python --version
+
+    Python 2.7.6
 
 
 ### Start Development Server
