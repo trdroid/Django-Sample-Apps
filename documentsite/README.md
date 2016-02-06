@@ -341,6 +341,25 @@ Each attribute in a model class corresponds to a column in the table that the mo
 
 A Model class obtains its default functionality from <b>django.db.models.Model</b>, which allows easy interaction with the database.
 
+<i>Installing required modules</i>
+
+Each document is associated with the following datetime attributes: created_at, updated_at, released_on. To provide timezone definitions for Python and to satisfy SQLite's requirement to work with datetimes, install <i>pytz</i> module.
+
+> $ (vir_env) droid@droidserver:~/onGit/Django/documentsite$ pip install pytz
+
+    Collecting pytz
+      Downloading pytz-2015.7-py2.py3-none-any.whl (476kB)
+        100% |████████████████████████████████| 479kB 673kB/s 
+    Installing collected packages: pytz
+    Successfully installed pytz-2015.7
+
+The pytz module is saved in the virtual environment directory's lib/<python-version>/site-packages directory.
+
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ ls /home/droid/scratchpad/Django/vir_env/lib/python3.4/site-packages/
+
+    django                  easy_install.py  pip                  pkg_resources  pytz                   setuptools                   wheel
+    Django-1.9.2.dist-info  _markerlib       pip-8.0.2.dist-info  __pycache__    pytz-2015.7.dist-info  setuptools-19.6.2.dist-info  wheel-0.26.0.dist-info
+
 
 
 
