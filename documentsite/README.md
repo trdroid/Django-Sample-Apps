@@ -1,8 +1,8 @@
 ### Projects, Applications
 
 In Django,
-* Project: is a Django installation with settings
-* Application: is a collection of models, views, templates and URLs
+* Project: is a Django installation with settings. A project is considered as the website and it constitutes applications which can be reused in other projects. For example, a document management site could contain applications like documents, feedback etc. The feedback application can be used in other projects like blogs, albums etc.
+* Application: is a collection of models, views, templates and URLs. Applications extend and customize the framework extension points to provide specific functionalities. 
 
 ### Creating the project
 
@@ -27,6 +27,8 @@ Create the project
 ### Project Structure
   
 <img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/app%20structure.png"/>
+
+<b> Generated Files </b>
 
 <i>documentsite/documentsite/</i>: is the project directory
 
@@ -216,6 +218,10 @@ DATABASES = {
 ```
 <i>LANGUAGE_CODE</i>: specifies the default language code for this Django site.
 
+<i>USE_TZ</i>: is a boolean that specifies if the time zone support is active. Django supports datetimes that are aware of timezones. USE_TZ is set to true by default.
+
+<b> Create tables in the database </b>
+
 To create the tables in the database, run the <i>migrate</i> management command:
 
 > (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py migrate
@@ -239,6 +245,17 @@ To create the tables in the database, run the <i>migrate</i> management command:
 
 NOTE:  When the virtual environment is active, python in the command line refers to the version of python used when creating the virtual environment.
 
+The version of python when the virtual environment is active is 3.4.3 as it was created with that version.
+
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python --version
+
+    Python 3.4.3
+
+Whereas, the version of python on the system is 2.7.6
+
+> droid@droidserver:~$ python --version
+
+    Python 2.7.6
 
 
 ### Start Development Server
@@ -288,4 +305,75 @@ Settings for an environment can be saved in its own separate file and loaded as 
 To deploy an application in a production environment, it should be run as a <b>Web Server Gateway Interface (WSGI)</b> application deployed on a real web server such as Apache, Gunicorn or uWSGI.
 
 https://docs.djangoproject.com/en/1.9/howto/deployment/
+
+### Creating an application
+
+> $ (vir_env) droid@droidserver:~/onGit/Django/documentsite$ python manage.py startapp docs
+
+> $ (vir_env) droid@droidserver:~/onGit/Django$ ls documentsite
+
+    db.sqlite3  docs  documentsite  manage.py  _misc  README.md
+    
+> $ (vir_env) droid@droidserver:~/onGit/Django$ ls documentsite/docs
+
+    admin.py  apps.py  __init__.py  migrations  models.py  tests.py  views.py
+
+<img src="https://github.com/gruprog/Django-Examples/blob/master/documentsite/_misc/creating_docs_application.png"/>
+
+### Application Structure
+
+<b> Generated Files </b>
+
+<i>documentsite/docs/migrations/</i>
+
+is the directory that holds database migrations of the application. Django keeps track of model changes using migrations and synchronizes the database accordingly. 
+
+<i>documentsite/docs/admin.py</i>
+
+is the file where models are registered to include them into the Django administration site, the usage of which is optional.
+
+<i>documentsite/docs/models.py</i>
+
+a MUST TO HAVE file that constitutes the data models of the application. It could also be left empty.
+
+<i>documentsite/docs/tests.py</i>
+
+is where the tests of the application should be added
+
+<i>documentsite/docs/views.py</i>
+
+contains the application logic. Each web request is routed to an appropriate view which receives the HTTP request, processes it, and returns a response. 
+
+### Designing Schema for Documents
+
+A model in Django is a python class that inherits from <b>django.db.models.Model</b>. 
+
+Django creates a table for each model in <i>documentsite/docs/models.py</i>.
+
+Each attribute in a model class corresponds to a column in the table that the model class represents.
+
+A Model class obtains its default functionality from <b>django.db.models.Model</b>, which allows easy interaction with the database.
+
+<i>Installing required modules</i>
+
+Each document is associated with the following datetime attributes: created_at, updated_at, released_on. To provide timezone definitions for Python and to satisfy SQLite's requirement to work with datetimes, install <i>pytz</i> module.
+
+> $ (vir_env) droid@droidserver:~/onGit/Django/documentsite$ pip install pytz
+
+    Collecting pytz
+      Downloading pytz-2015.7-py2.py3-none-any.whl (476kB)
+        100% |████████████████████████████████| 479kB 673kB/s 
+    Installing collected packages: pytz
+    Successfully installed pytz-2015.7
+
+The pytz module is saved in the virtual environment directory's lib/<python-version>/site-packages directory.
+
+> (vir_env) droid@droidserver:~/onGit/Django/documentsite$ ls /home/droid/scratchpad/Django/vir_env/lib/python3.4/site-packages/
+
+    django                  easy_install.py  pip                  pkg_resources  pytz                   setuptools                   wheel
+    Django-1.9.2.dist-info  _markerlib       pip-8.0.2.dist-info  __pycache__    pytz-2015.7.dist-info  setuptools-19.6.2.dist-info  wheel-0.26.0.dist-info
+
+
+
+
 
