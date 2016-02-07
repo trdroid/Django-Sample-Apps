@@ -76,5 +76,7 @@ Run the <i>migrate</i> command
 
 The <i>migrate</i> command reads the available models and creates tables for the ones that do not already exist in the database.
 
+<img src="_misc/after%20migrate%20command.png"/>
 
+### Interacting with Models
 
