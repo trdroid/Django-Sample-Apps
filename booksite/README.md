@@ -26,31 +26,6 @@ The following snapshot shows the structure and contents of the generated app dir
 
 <img src="_misc/app%20structure.png"/>
 
-### Designing Models
-
-Create "Author" and "Book" models in <i>booksite/books/models.py</i>
-
-```python
-from django.db import models
-
-# Create your models here.
-class Author(models.Model):
-	name = models.CharField(max_length=50)
-
-	def __str__(self):
-		return self.name
-
-class Book(models.Model):
-	title = models.CharField(max_length=100)
-	content = models.TextField()
-	published_on = models.DateField()
-
-	author = models.ForeignKey(Author, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return self.title
-```
-
 ### Create tables in the database
 
 Run the <i>migrate</i> command
@@ -77,6 +52,32 @@ Run the <i>migrate</i> command
 The <i>migrate</i> command reads the available models and creates tables for the ones that do not already exist in the database.
 
 <img src="_misc/after%20migrate%20command.png"/>
+
+### Designing Models
+
+Create "Author" and "Book" models in <i>booksite/books/models.py</i>
+
+```python
+from django.db import models
+
+# Create your models here.
+class Author(models.Model):
+	name = models.CharField(max_length=50)
+
+	def __str__(self):
+		return self.name
+
+class Book(models.Model):
+	title = models.CharField(max_length=100)
+	content = models.TextField()
+	published_on = models.DateField()
+
+	author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.title
+```
+
 
 ### Interacting with Models
 
