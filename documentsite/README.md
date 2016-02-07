@@ -10,7 +10,7 @@ Activate the virtual environment
 
 > $ droid@droidserver:~/onGit/Django$ source /home/droid/scratchpad/Django/vir_env/bin/activate
 
-    (vir_env) droid@droidserver:~/onGit/Django$ django-admin startproject documents-site
+    (vir_env) droid@droidserver:~/onGit/Django$
 
 Create the project
 
