@@ -118,7 +118,7 @@ The following snapshot shows the structure and contents of the generated app dir
 
 <img src="_misc/app%20structure.png"/>
 
-### Designing Models
+### Designing App Models
 
 Create "Author" and "Book" models in <i>booksite/books/models.py</i>
 
@@ -143,9 +143,7 @@ class Book(models.Model):
 		return self.title
 ```
 
-### Activating Models
-
-<b> Install app </b>
+### Installing App
 
 Let the project know that the "books" app is installed by including the string 'books.apps.BooksConfig' in the INSTALLED_APPS setting in <i>booksite/booksite/settings.py</i>. With this, Django knows to include the "books" app in the project.
 
