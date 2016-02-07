@@ -18,6 +18,8 @@
 
 Run the <i>migrate</i> command
 
+> (vir_env) droid@droidserver:~/onGit/Django$ cd booksite
+
 > (vir_env) droid@droidserver:~/onGit/Django/booksite$ python manage.py migrate
 
     Operations to perform:
