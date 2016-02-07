@@ -49,9 +49,72 @@ Run the <i>migrate</i> command
       Applying auth.0007_alter_validators_add_error_messages... OK
       Applying sessions.0001_initial... OK
 
-The <i>migrate</i> command reads the available models and creates tables for the ones that do not already exist in the database.
+The <i>migrate</i> command looks at the "INSTALLED_APPS" setting in <i>booksite/booksite/settings.py</i> as shown below and creates tables according to the database settings in <i>booksite/booksite/settings.py</i> and the database migrations of the app. 
+
+It looks at the models in each app and creates tables for the ones that do not already exist in the database.
+
+INSTALLED_APPS settings in <i>booksite/booksite/settings.py</i>
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',    
+]
+```
 
 <img src="_misc/after%20migrate%20command.png"/>
+
+### Looking at the contents of the database
+
+https://www.sqlite.org/cli.html
+
+> (vir_env) droid@droidserver:~/onGit/Django/booksite$ sqlite3
+
+	SQLite version 3.8.2 2013-12-06 14:53:30
+	Enter ".help" for instructions
+	Enter SQL statements terminated with a ";"
+	sqlite> .open db.sqlite3
+	sqlite> .schema
+	CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL);
+	CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE);
+	CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id"));
+	CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "group_id" integer NOT NULL REFERENCES "auth_group" ("id"));
+	CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id"));
+	CREATE UNIQUE INDEX "auth_group_permissions_group_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+	CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id");
+	CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id");
+	CREATE UNIQUE INDEX "auth_user_groups_user_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+	CREATE INDEX "auth_user_groups_e8701ad4" ON "auth_user_groups" ("user_id");
+	CREATE INDEX "auth_user_groups_0e939a4f" ON "auth_user_groups" ("group_id");
+	CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+	CREATE INDEX "auth_user_user_permissions_e8701ad4" ON "auth_user_user_permissions" ("user_id");
+	CREATE INDEX "auth_user_user_permissions_8373b171" ON "auth_user_user_permissions" ("permission_id");
+	CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "action_time" datetime NOT NULL);
+	CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id");
+	CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id");
+	CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL);
+	CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+	CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL);
+	CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+	CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id");
+	CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE);
+	CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL);
+	CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date");
+	sqlite> 
+
+
+	sqlite> .tables
+	auth_group                  auth_user_user_permissions
+	auth_group_permissions      django_admin_log          
+	auth_permission             django_content_type       
+	auth_user                   django_migrations         
+	auth_user_groups            django_session   
+	
+	sqlite> .exit	
 
 ### Designing Models
 
@@ -78,6 +141,33 @@ class Book(models.Model):
 		return self.title
 ```
 
+### Activating Models
+
+Let the project know that the "books" app is installed by including the string 'books.apps.BooksConfig' in the INSTALLED_APPS setting in <i>booksite/booksite/settings.py</i>
+
+```python
+INSTALLED_APPS = [
+    'books.apps.BooksConfig', #<----- refers to the 'books' app
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',    
+]
+```
+
+Instead of specifying the name of the app "books" directly in INSTALLED_APPS, specify it using 'books.apps.BooksConfig' which specifies the name of the app as follows:
+
+<i>booksite/books/apps.py</i>
+
+```python
+from django.apps import AppConfig
+
+
+class BooksConfig(AppConfig):
+    name = 'books'
+```
 
 ### Interacting with Models
 
