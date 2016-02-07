@@ -14,18 +14,6 @@
 
 <img src="_misc/project%20structure.png"/>
 
-### Creating an app
-
-Create an app called "books"
-
-> (vir_env) droid@droidserver:~/onGit/Django/booksite$ python manage.py startapp books
-
-### App structure
-
-The following snapshot shows the structure and contents of the generated app directory
-
-<img src="_misc/app%20structure.png"/>
-
 ### Create tables in the database
 
 Run the <i>migrate</i> command
@@ -115,6 +103,18 @@ https://www.sqlite.org/cli.html
 	auth_user_groups            django_session   
 	
 	sqlite> .exit	
+
+### Creating an app
+
+Create an app called "books"
+
+> (vir_env) droid@droidserver:~/onGit/Django/booksite$ python manage.py startapp books
+
+### App structure
+
+The following snapshot shows the structure and contents of the generated app directory
+
+<img src="_misc/app%20structure.png"/>
 
 ### Designing Models
 
