@@ -99,3 +99,8 @@ Verify if Django has been installed
     >>> django.VERSION
     (1, 9, 2, 'final', 0)
 
+(or)
+
+> (vir_env) droid@droidserver:~/onGit/Django/booksite$ python -c "import django; print(django.get_version())"
+
+        1.9.2
