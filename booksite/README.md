@@ -293,7 +293,7 @@ class BooksConfig(AppConfig):
 
 This command sets the DJANGO_SETTINGS_MODULE environment variable, which makes the Python import path to "booksite/settings.py" available to Django.
 
-To start by using a plain Python shell
+Alternatively, to start by using a plain Python shell
 
 > (vir_env) droid@droidserver:~/onGit/Django/booksite$ export DJANGO_SETTINGS_MODULE=booksite.settings
 
