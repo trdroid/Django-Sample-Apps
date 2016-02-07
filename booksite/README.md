@@ -174,6 +174,8 @@ Specify Django about changes to the models (in this case, the addition of new mo
 
 Django saves the changes to the models, and therefore to the database schema under \<project\>/\<app\>/migrations directory. In this case, the migrations are saved in:
 
+<img src="_misc/after%20running%20makemigrations.png"/>
+
 <i>booksite/books/migrations/0001_initial.py</i>
 
 ```python
