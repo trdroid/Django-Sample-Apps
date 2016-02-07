@@ -9,3 +9,8 @@
 > (vir_env) droid@droidserver:~/onGit/Django$ ls
 
     booksite  documentsite  _misc
+
+### Project structure
+
+<img src="_misc/project%20structure.png"/>
+
