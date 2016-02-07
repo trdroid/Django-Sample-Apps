@@ -163,6 +163,16 @@ INSTALLED_APPS = [
 
 Instead of specifying the name of the app "books" directly in INSTALLED_APPS, specify it using 'books.apps.BooksConfig' which specifies the name of the app as follows:
 
+<i>booksite/books/apps.py</i>
+
+```python
+from django.apps import AppConfig
+
+
+class BooksConfig(AppConfig):
+    name = 'books'  # <----------
+```
+
 <b>Make Migrations</b>
 
 Specify Django about changes to the models (in this case, the addition of new models, "Author" and "Book") by running <i>makemigrations</i>. 
@@ -269,16 +279,6 @@ Django keeps track of the migrations it applies using a special table in the dat
 	auth_user_user_permissions  django_session   
 
 Notice the tables: books_author & books_book
-
-<i>booksite/books/apps.py</i>
-
-```python
-from django.apps import AppConfig
-
-
-class BooksConfig(AppConfig):
-    name = 'books'  # <----------
-```
 
 ### Interacting with Models
 
