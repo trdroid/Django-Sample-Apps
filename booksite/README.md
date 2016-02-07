@@ -235,7 +235,7 @@ First, check to see what SQL the migration would run:
 
 <b> Run Migration </b>
 
-Running a migration reflects the changes done to the models in the database schema i.e. it has the affect of synchronizing the changes done to the models (which in this case is the addition of two models, "Author" and "Book") with the database schema (which in this case is by creating two tables, "Author" and "Book").
+Running a migration reflects the changes done to the models in the database schema i.e. it has the affect of synchronizing the changes done to the models (which in this case is the addition of two models, "Author" and "Book") with the database schema (which in this case is by creating two tables).
 
 > (vir_env) droid@droidserver:~/onGit/Django/booksite$ python manage.py migrate
 
@@ -250,7 +250,21 @@ Django keeps track of the migrations it applies using a special table in the dat
 
 <b> Check the database for new tables </b>
 
+> (vir_env) droid@droidserver:~/onGit/Django/booksite$ sqlite3
 
+	SQLite version 3.8.2 2013-12-06 14:53:30
+	Enter ".help" for instructions
+	Enter SQL statements terminated with a ";"
+	sqlite> .open db.sqlite3
+	sqlite> .tables
+	auth_group                  books_author              
+	auth_group_permissions      books_book                
+	auth_permission             django_admin_log          
+	auth_user                   django_content_type       
+	auth_user_groups            django_migrations         
+	auth_user_user_permissions  django_session   
+
+Notice the tables: books_author & books_book
 
 <i>booksite/books/apps.py</i>
 
@@ -263,4 +277,33 @@ class BooksConfig(AppConfig):
 ```
 
 ### Interacting with Models
+
+<b> Launch Interactive Python Shell </b>
+
+> $ (vir_env) droid@droidserver:~/onGit/Django/booksite$ python manage.py shell
+
+	Python 3.4.3 (default, Oct 14 2015, 20:28:29) 
+	[GCC 4.8.4] on linux
+	Type "help", "copyright", "credits" or "license" for more information.
+	(InteractiveConsole)
+	>>> from books.models import Author, Book
+	>>>
+
+This command sets the DJANGO_SETTINGS_MODULE environment variable, which makes the Python import path to "booksite/settings.py" available to Django.
+
+To start by using a plain Python shell
+
+> (vir_env) droid@droidserver:~/onGit/Django/booksite$ export DJANGO_SETTINGS_MODULE=booksite.settings
+
+> (vir_env) droid@droidserver:~/onGit/Django/booksite$ python3
+
+	Python 3.4.3 (default, Oct 14 2015, 20:28:29) 
+	[GCC 4.8.4] on linux
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>> import django
+	>>> django.setup()
+	>>> from books.models import Author, Book
+	>>> 
+
+<b>Interacting with Models</i>
 
